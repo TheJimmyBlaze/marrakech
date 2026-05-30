@@ -1,0 +1,32 @@
+
+@font-face {
+  font-family: Pixolletta;
+  src: url(./pixolletta8px.ttf);
+}
+
+body {
+  
+  font: 10px Pixolletta;
+  color: rgba(255, 255, 255);
+  background-color: #10141f;
+
+  width: 100vw;
+  height: 100vh;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+canvas {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+}
