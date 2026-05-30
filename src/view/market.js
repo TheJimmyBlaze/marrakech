@@ -1,7 +1,8 @@
 import {
     useRegistry,
     setRegistry,
-    usePerformanceDisplay
+    usePerformanceDisplay,
+    usePosition
 } from 'titanium';
 
 import {
@@ -13,6 +14,7 @@ import {
 } from '../globals';
 
 import style from '../style';
+import { useRug } from '../rug/rug';
 
 export const useMarket = () => {
 
@@ -31,6 +33,10 @@ export const useMarket = () => {
             profiler,
             style,
             drawCamera: uiCamera
+        }));
+
+        registry.register(useRug({
+            position: usePosition()
         }));
     };
 
