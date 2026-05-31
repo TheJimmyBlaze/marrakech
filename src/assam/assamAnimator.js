@@ -29,12 +29,12 @@ export const useAssamAnimator = ({
         sliceHeight: 32,
         runs: [
             useSpriteSheetRun({
-                name: 'stand',
+                name: spriteNames.stand,
                 x: 0, y: 0,
                 spriteCount: 1
             }),
             useSpriteSheetRun({
-                name: 'walk',
+                name: spriteNames.walk,
                 x: 1, y: 0,
                 spriteCount: 8,
                 fps: 12
@@ -56,6 +56,8 @@ export const useAssamAnimator = ({
     setSprite(spriteNames.stand);
 
     const update = () => {
+
+        console.log(state.getState());
         
         switch(state.getState()) {
             case movementStates.stand:
@@ -67,7 +69,7 @@ export const useAssamAnimator = ({
         }
     };
 
-    const draw = sprite.actions.draw;
+    const draw = () => sprite.actions.draw();
 
     return {
         actions: {

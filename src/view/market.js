@@ -17,6 +17,7 @@ import style from '../style';
 import { usePlayerController } from '../player/usePlayerController';
 import { useBoard } from '../board/board';
 import { useAssam } from '../assam/assam';
+import { useAssamObjective } from '../assam/assamObjective';
 
 export const useMarket = () => {
 
@@ -38,7 +39,10 @@ export const useMarket = () => {
         }));
 
         registry.register(useBoard());
+
+        registry.register(useAssamObjective());
         registry.register(useAssam());
+
         registry.register(usePlayerController());
     };
 

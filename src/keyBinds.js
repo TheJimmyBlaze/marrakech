@@ -20,6 +20,6 @@ input.setBind({
 input.setBind({
     alias: binds.rightClick,
     primary: {
-        mouseButton: 1
+        mouseButton: 2
     }
 });

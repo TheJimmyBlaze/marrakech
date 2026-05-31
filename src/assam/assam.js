@@ -10,6 +10,7 @@ import {
 
 import { useAssamState } from './assamState';
 import { useAssamAnimator } from './assamAnimator';
+import { useAssamController } from './assamController';
 
 export const useAssam = () => {
 
@@ -25,11 +26,16 @@ export const useAssam = () => {
         camera
     });
 
+    const controller = useAssamController({
+        position
+    });
+
     const entity = useEntity({
         components: {
             position,
             state,
-            animator
+            animator,
+            controller
         }
     });
 

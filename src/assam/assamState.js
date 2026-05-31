@@ -12,15 +12,13 @@ const isNearEnoughToBeStanding = position => {
     
     const {x, y} = position.getPosition();
 
-    const xDist = x % tileSize;
-    const yDist = y % tileSize;
+    const xDist = Math.abs(x) % tileSize;
+    const yDist = Math.abs(y) % tileSize;
 
-    const dist = Math.sqrt(
-        Math.pow(xDist, 2) +
-        Math.pow(yDist, 2)
-    );
+    const xClose = xDist > tileSize - nearEnough || xDist < nearEnough;
+    const yClose = yDist > tileSize - nearEnough || yDist < nearEnough
 
-    return -nearEnough > dist && dist > -nearEnough;
+    return xClose && yClose;
 };
 
 export const useAssamState = ({
