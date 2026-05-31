@@ -15,6 +15,7 @@ import {
 
 import style from '../style';
 import { usePlayerController } from '../player/usePlayerController';
+import { useBoard } from '../board/board';
 
 export const useMarket = () => {
 
@@ -35,6 +36,7 @@ export const useMarket = () => {
             drawCamera: uiCamera
         }));
 
+        registry.register(useBoard());
         registry.register(usePlayerController());
     };
 
