@@ -14,7 +14,7 @@ import {
 } from '../globals';
 
 import style from '../style';
-import { useRug } from '../rug/rug';
+import { usePlayerController } from '../player/usePlayerController';
 
 export const useMarket = () => {
 
@@ -35,9 +35,7 @@ export const useMarket = () => {
             drawCamera: uiCamera
         }));
 
-        registry.register(useRug({
-            position: usePosition()
-        }));
+        registry.register(usePlayerController());
     };
 
     return {
