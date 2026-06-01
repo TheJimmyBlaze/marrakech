@@ -1,28 +1,34 @@
-import { useFiniteStateMachine } from 'titanium';
+import { registry, useFiniteStateMachine } from 'titanium';
+
+import { tileSize } from '../board/board'; 
+import { assamObjectiveId } from './assamObjective';
 
 export const movementStates = {
     stand: 'assam.state.movement.stand',
     walk: 'assam.state.movement.walk'
 };
 
-const tileSize = 32;
 const nearEnough = 1;
 
 const isNearEnoughToBeStanding = position => {
     
+    const objective = registry().getEntityById(assamObjectiveId);
+    const objectivePosition = objective.components.position;
+
+    const {x: objectiveX, y: objectiveY} = objectivePosition.getPosition();
     const {x, y} = position.getPosition();
 
-    const xDist = Math.abs(x) % tileSize;
-    const yDist = Math.abs(y) % tileSize;
+    const distX = Math.abs(objectiveX - x);
+    const distY = Math.abs(objectiveY - y);
 
-    const xClose = xDist > tileSize - nearEnough || xDist < nearEnough;
-    const yClose = yDist > tileSize - nearEnough || yDist < nearEnough
+    const dist = Math.hypot(Math.pow(distX, 2) + Math.pow(distY, 2));
 
-    return xClose && yClose;
+    return dist <= nearEnough;
 };
 
 export const useAssamState = ({
-    position
+    position,
+    stopTrigger
 }) => {
 
     const machine = useFiniteStateMachine({
@@ -38,7 +44,8 @@ export const useAssamState = ({
     machine.addTransition({
         exitState: movementStates.walk,
         enterState: movementStates.stand,
-        condition: () => isNearEnoughToBeStanding(position)
+        condition: () => isNearEnoughToBeStanding(position),
+        tigger: stopTrigger
     });
 
     return machine;

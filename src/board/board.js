@@ -11,6 +11,8 @@ import {
     shaders
 } from '../globals';
 
+export const tileSize = 32;
+
 export const useBoard = () => {
 
     const position = usePosition();

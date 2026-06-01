@@ -4,9 +4,12 @@ import {
     useSpriteOptions
 } from 'titanium';
 
-import { movementStates } from './assamState';
+import {
+    gameCamera as camera,
+    shaders
+} from '../globals';
 
-import { shaders } from '../globals';
+import { movementStates } from './assamState';
 
 const spriteNames = {
     stand: 'stand',
@@ -15,8 +18,7 @@ const spriteNames = {
 
 export const useAssamAnimator = ({
     position,
-    state,
-    camera
+    state
 }) => {
 
     const spriteOptions = useSpriteOptions({
@@ -56,8 +58,6 @@ export const useAssamAnimator = ({
     setSprite(spriteNames.stand);
 
     const update = () => {
-
-        console.log(state.getState());
         
         switch(state.getState()) {
             case movementStates.stand:

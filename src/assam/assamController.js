@@ -5,7 +5,7 @@ import { assamObjectiveId } from './assamObjective';
 export const useAssamController = ({
     position
 }) => {
-
+    
     const update = () => {
 
         const objective = registry().getEntityById(assamObjectiveId);
