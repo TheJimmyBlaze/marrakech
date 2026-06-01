@@ -5,7 +5,8 @@ import {
 
 import { tileSize } from '../board/board';
 
-import { useAssamArrowAnimator } from './assamArrowAnimator';
+import { useArrowAnimator } from './arrowAnimator';
+import { useArrowController } from './arrowController';
 
 export const arrowDirection = {
     up: 'up',
@@ -14,7 +15,9 @@ export const arrowDirection = {
     right:' right'
 };
 
-export const useAssamArrow = ({
+const arrowDist = 26;
+
+export const useArrow = ({
     position: assamPosition,
     direction
 }) => {
@@ -24,16 +27,16 @@ export const useAssamArrow = ({
 
     switch (direction) {
         case arrowDirection.left:
-            x = -tileSize;
+            x = -arrowDist;
             break;
         case arrowDirection.right:
-            x = tileSize;
+            x = arrowDist;
             break;
         case arrowDirection.up:
-            y = -tileSize;
+            y = -arrowDist;
             break;
         case arrowDirection.down:
-            y = tileSize;
+            y = arrowDist;
             break;
     }
 
@@ -44,7 +47,13 @@ export const useAssamArrow = ({
 
     let active = false;
 
-    const animator = useAssamArrowAnimator({
+    const controller = useArrowController({
+        position,
+        direction,
+        setActive: value => active = value
+    });
+
+    const animator = useArrowAnimator({
         position,
         direction,
         getActive: () => active
@@ -52,8 +61,10 @@ export const useAssamArrow = ({
 
     const entity = useEntity({
         components: {
+            arrowFlag: {},
             position,
-            animator,
+            controller,
+            animator
         }
     });
 

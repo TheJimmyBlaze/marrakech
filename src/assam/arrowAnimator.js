@@ -9,7 +9,7 @@ import {
     shaders
 } from '../globals';
 
-import { arrowDirection } from './assamArrow';
+import { arrowDirection } from './arrow';
 
 const spriteNames = {
     up: 'up',
@@ -22,7 +22,7 @@ const spriteNames = {
     rightBright: 'rightBright'
 };
 
-export const useAssamArrowAnimator = ({
+export const useArrowAnimator = ({
     position,
     direction,
     getActive

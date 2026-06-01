@@ -8,7 +8,7 @@ export const movementStates = {
     walk: 'assam.state.movement.walk'
 };
 
-const nearEnough = 1;
+const nearEnough = 4;
 
 const isNearEnoughToBeStanding = position => {
     
@@ -45,7 +45,7 @@ export const useAssamState = ({
         exitState: movementStates.walk,
         enterState: movementStates.stand,
         condition: () => isNearEnoughToBeStanding(position),
-        tigger: stopTrigger
+        trigger: stopTrigger
     });
 
     return machine;

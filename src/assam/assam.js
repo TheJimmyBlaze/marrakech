@@ -10,24 +10,24 @@ import { useAssamController } from './assamController';
 
 import {
     arrowDirection,
-    useAssamArrow
-} from './assamArrow';
+    useArrow
+} from './arrow';
 
 const spawnArrows = position => {
 
-    registry().register(useAssamArrow({
+    registry().register(useArrow({
         position,
         direction: arrowDirection.up
     }));
-    registry().register(useAssamArrow({
+    registry().register(useArrow({
         position,
         direction: arrowDirection.down
     }));
-    registry().register(useAssamArrow({
+    registry().register(useArrow({
         position,
         direction: arrowDirection.left
     }));
-    registry().register(useAssamArrow({
+    registry().register(useArrow({
         position,
         direction: arrowDirection.right
     }));
@@ -40,7 +40,8 @@ export const useAssam = () => {
     spawnArrows(position);
 
     const state = useAssamState({
-        position
+        position,
+        stopTrigger: () => spawnArrows(position)
     });
 
     const animator = useAssamAnimator({

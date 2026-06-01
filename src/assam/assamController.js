@@ -13,7 +13,7 @@ export const useAssamController = ({
 
         const {x, y} = objectivePosition.getPosition();
 
-        position.lerpTo(x, y, 0.25);
+        position.lerpTo(x, y, 0.1);
     };
 
     return {
