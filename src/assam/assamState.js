@@ -7,7 +7,7 @@ export const movementStates = {
     walk: 'assam.state.movement.walk'
 };
 
-const nearEnough = 8;
+const nearEnough = 4;
 
 const isNearEnoughToBeStanding = (
     position,

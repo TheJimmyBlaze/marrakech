@@ -118,6 +118,11 @@ const getDirectionalMovement = direction => {
         case arrowDirection.down:
             y = 1;
             break;
+        default:
+            //hopefully 3,3 is stange enough for me to notice a bug
+            x = 3;
+            y = 3;
+            break;
     }
 
     return {x, y};
@@ -125,15 +130,17 @@ const getDirectionalMovement = direction => {
 
 const getOffboardDirection = (x, y) => {
 
-    if (x === -1 && y === -3) return arrowDirection.down;
+    if (x === -4 && y === -3) return arrowDirection.down;
     if (x === -3 && y === -4) return arrowDirection.right;
     if (x === 4 && y === 3) return arrowDirection.up;
     if (x === 3 && y === 4) return arrowDirection.left;
 
-    if (x === -1) return arrowDirection.right;
-    if (x === 7) return arrowDirection.left;
-    if (y === -1) return arrowDirection.down;
-    if (y === 7) return arrowDirection.up;
+    if (x === -4) return arrowDirection.right;
+    if (x === 4) return arrowDirection.left;
+    if (y === -4) return arrowDirection.down;
+    if (y === 4) return arrowDirection.up;
+
+    return arrowDirection.up;
 };
 
 export const getMovement = (

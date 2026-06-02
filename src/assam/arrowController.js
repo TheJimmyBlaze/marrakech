@@ -17,6 +17,7 @@ const nearEnough = 14;
 const isNearEnoughToClick = position => {
 
     const mousePosition = input().getMousePosition(camera);
+    if (!mousePosition) return false;
 
     const {x: mouseX, y: mouseY} = mousePosition.getPosition();
     const {x, y} = position.getPosition();
@@ -54,10 +55,10 @@ export const useArrowController = ({
         if (!active) return;
         if (!input().wasPressed(binds.leftClick, true)) return;
 
+        clearArrows();
+
         const { moveAssam } = registry().getComponentsByName('assamController')[0];
         moveAssam(direction);
-
-        clearArrows();
     };
 
     return {

@@ -19,10 +19,7 @@ export const useAssam = () => {
     const state = useAssamState({
         position,
         objectivePosition: assamController.objectivePosition,
-        stopTrigger: () => {
-            const callback = assamController.getNextMove();
-            callback?.();
-        }
+        stopTrigger: () => assamController.getNextMove()?.()
     });
 
     const animator = useAssamAnimator({
