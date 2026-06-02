@@ -9,11 +9,10 @@ import {
 
 import { binds } from '../keyBinds';
 
-import { assamObjectiveId } from './assamObjective';
 import { arrowDirection } from './arrow';
 import { tileSize } from '../board/board';
 
-const nearEnough = 12;
+const nearEnough = 14;
 
 const isNearEnoughToClick = position => {
 
@@ -35,27 +34,6 @@ export const useArrowController = ({
     direction,
     setActive
 }) => {
-
-    const moveAssam = () => {
-
-        const objective = registry().getEntityById(assamObjectiveId);
-        const objectivePosition = objective.components.position;
-
-        switch (direction) {
-            case arrowDirection.up:
-                objectivePosition.move(0, -tileSize);
-                break;
-            case arrowDirection.down:
-                objectivePosition.move(0, tileSize);
-                break;
-            case arrowDirection.left:
-                objectivePosition.move(-tileSize, 0);
-                break;
-            case arrowDirection.right:
-                objectivePosition.move(tileSize, 0);
-                break;
-        }
-    };
     
     const clearArrows = () => {
 
@@ -76,7 +54,9 @@ export const useArrowController = ({
         if (!active) return;
         if (!input().wasPressed(binds.leftClick, true)) return;
 
-        moveAssam();
+        const { moveAssam } = registry().getComponentsByName('assamController')[0];
+        moveAssam(direction);
+
         clearArrows();
     };
 

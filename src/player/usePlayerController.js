@@ -13,8 +13,6 @@ import { binds } from '../keyBinds';
 
 import { useRug } from '../rug/rug';
 
-import { assamObjectiveId } from '../assam/assamObjective';
-
 export const usePlayerController = () => {
 
     const update = () => {
