@@ -145,9 +145,10 @@ const getOffboardDirection = (x, y) => {
 
 export const getMovement = (
     position,
-    direction,
+    initialDirection,
 ) => {
 
+    let direction = initialDirection;
     const {x: startX, y: startY} = position.getPosition();
 
     let trackX = startX / tileSize;
@@ -167,8 +168,8 @@ export const getMovement = (
         const offBoardMoves = offBoardMovements[trackX]?.[trackY];
         if (!offBoardMoves) continue;
 
-        const newDirection = getOffboardDirection(trackX, trackY);
-        const newDelta = getDirectionalMovement(newDirection);
+        direction = getOffboardDirection(trackX, trackY);
+        const newDelta = getDirectionalMovement(direction);
         deltaX = newDelta.x;
         deltaY = newDelta.y;
 
@@ -183,5 +184,8 @@ export const getMovement = (
         }
     }
 
-    return moves;
+    return {
+        moves,
+        direction
+    };
 };

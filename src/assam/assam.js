@@ -4,9 +4,11 @@ import {
     registry
 } from 'titanium';
 
-import { useAssamState } from './assamState';
+import { useAssamMovementState } from './assamMovementState';
 import { useAssamAnimator } from './assamAnimator';
 import { useAssamController } from './assamController';
+import { arrowDirection } from './arrow';
+import { useAssamDirectionState } from './assamDirectionState';
 
 export const useAssam = () => {
 
@@ -16,21 +18,28 @@ export const useAssam = () => {
         position
     });
 
-    const state = useAssamState({
+    const movementState = useAssamMovementState({
         position,
         objectivePosition: assamController.objectivePosition,
         stopTrigger: () => assamController.getNextMove()?.()
     });
 
+    const directionState = useAssamDirectionState({
+        position,
+        objectivePosition: assamController.objectivePosition
+    });
+
     const animator = useAssamAnimator({
         position,
-        state
+        movementState,
+        directionState
     });
 
     const entity = useEntity({
         components: {
             position,
-            state,
+            movementState,
+            directionState,
             animator,
             assamController
         }

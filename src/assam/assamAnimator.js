@@ -9,7 +9,8 @@ import {
     shaders
 } from '../globals';
 
-import { movementStates } from './assamState';
+import { movementStates } from './assamMovementState';
+import { directionStates } from './assamDirectionState';
 
 const spriteNames = {
     stand: 'stand',
@@ -18,11 +19,13 @@ const spriteNames = {
 
 export const useAssamAnimator = ({
     position,
-    state
+    movementState,
+    directionState
 }) => {
 
     const spriteOptions = useSpriteOptions({
-        zIndex: 1000
+        zIndex: 1000,
+        mirror: directionState.getState() === directionStates.left
     });
 
     const sprites = useSpriteSheet({
@@ -59,7 +62,7 @@ export const useAssamAnimator = ({
 
     const update = () => {
         
-        switch(state.getState()) {
+        switch(movementState.getState()) {
             case movementStates.stand:
                 setSprite(spriteNames.stand);
                 break;
@@ -67,6 +70,8 @@ export const useAssamAnimator = ({
                 setSprite(spriteNames.walk);
                 break;
         }
+
+        spriteOptions.setMirror(directionState.getState() === directionStates.left)
     };
 
     const draw = () => sprite.actions.draw();

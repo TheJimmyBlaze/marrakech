@@ -37,7 +37,7 @@ export const useAssamController = ({
     position
 }) => {
 
-    spawnArrows(position);
+    spawnArrows(position, arrowDirection.up);
 
     const objectivePosition = usePosition();
     
@@ -46,15 +46,19 @@ export const useAssamController = ({
     const pushMove = moveCallback => moveQueue.push(moveCallback);
     const getNextMove = () => moveQueue.shift();
     
-    const moveAssam = direction => {
+    const moveAssam = moveDirection => {
 
-        const moves = getMovement(objectivePosition, direction);
+        const {
+            moves,
+            direction
+        } = getMovement(objectivePosition, moveDirection);
+
         moves.forEach(move => {
             pushMove(() => objectivePosition.move(move.x * tileSize, move.y * tileSize));
         });
 
         getNextMove()();
-        pushMove(() => spawnArrows(position));
+        pushMove(() => spawnArrows(position, direction));
     };
     
     const update = () => {

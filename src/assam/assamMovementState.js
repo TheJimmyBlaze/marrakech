@@ -1,4 +1,7 @@
-import { registry, useFiniteStateMachine } from 'titanium';
+import {
+    registry,
+    useFiniteStateMachine
+} from 'titanium';
 
 import { tileSize } from '../board/board'; 
 
@@ -25,7 +28,7 @@ const isNearEnoughToBeStanding = (
     return dist <= nearEnough;
 };
 
-export const useAssamState = ({
+export const useAssamMovementState = ({
     position,
     objectivePosition,
     stopTrigger
